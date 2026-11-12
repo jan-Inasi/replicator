@@ -24,7 +24,5 @@ def replicator2():
     elif indent_diff > 0:
         block = [row.lstrip(" " * indent_diff) for row in block]
     lines = lines[:insert_idx + 1] + block + lines[insert_idx + 1:]
-    print("\n".join(lines))
-    print(indent_diff, insert_idx)
-    print(insert_line)
+    pathlib.Path(__file__).write_text("\n".join(lines))
 replicator2()
