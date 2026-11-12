@@ -15,14 +15,12 @@ def replicator2():
     beg_idx = next(i for i in range(this_line_idx - 1, 0, -1) if lines[i] == " " * (this_line_indent - 4) + "def replicator2():")
     end_idx = next(i for i in range(this_line_idx + 1, len(lines)) if lines[i] == " " * (this_line_indent - 4) + "replicator2()")
     block = lines[beg_idx:end_idx+1]
+    block = [line.lstrip(" " * (this_line_indent - 4)) for line in block]
     lines = pathlib.Path(__file__).read_text().splitlines()
     insert_idx = random.randint(2, len(lines) - 1)
     insert_line = lines[insert_idx]
-    indent_diff = indent_len(lines[insert_idx]) - this_line_indent - 4
-    if indent_diff < 0:
-        block = [" " * (-indent_diff) + row for row in block]
-    elif indent_diff > 0:
-        block = [row.lstrip(" " * indent_diff) for row in block]
+    new_indent = indent_len(lines[insert_idx])
+    block = [(" " * new_indent) + line for line in block]
     lines = lines[:insert_idx] + block + lines[insert_idx:]
     pathlib.Path(__file__).write_text("\n".join(lines))
 replicator2()
