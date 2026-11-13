@@ -20,7 +20,7 @@ def replicator2():
     my_name = SOURCE[my_name_line_idx].split(' """ ')[1]
     parent_name =SOURCE[my_name_line_idx].split(' """  # son of ')[1]
     childs_docstr = f'    """ {child_name} """  # son of {my_name}'
-    block[1] = childs_docstr
+    block[my_name_line_idx - beg_idx] = childs_docstr
     print(f"running {my_name} son of {parent_name}")
     # read the source again because it might have been already overwritten by injected replicators
     lines = pathlib.Path(__file__).read_text().splitlines()
