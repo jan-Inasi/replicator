@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import inspect, pathlib, sys, random
+import inspect, pathlib, sys, random  # noqa: I001
 SOURCE = pathlib.Path(__file__).read_text().splitlines()  # we must preload it otherwise inspect()'ll get out of sync
 def replicator2():
     """ replicator """  # son of mine
